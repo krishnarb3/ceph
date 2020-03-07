@@ -29,7 +29,6 @@ Alexander Barg, Department of ECE/ISR, University of Maryland
 #include "include/stringify.h"
 #include "erasure-code/ErasureCodePlugin.h"
 #include "json_spirit/json_spirit_writer.h"
-#include "include/assert.h"
 
 extern "C" {
 #include "erasure-code/jerasure/jerasure/include/jerasure.h"
@@ -77,8 +76,8 @@ int ErasureCodeOptLrc::create_ruleset(const string &name,
     int min_rep = 3;
     int max_rep = get_chunk_count();
     int ret;
-    ret = crush.add_rule(steps, ruleset, pg_pool_t::TYPE_ERASURE,
-                         min_rep, max_rep, rno);
+    ret = crush.add_rule(rno, steps, pg_pool_t::TYPE_ERASURE,
+                         min_rep, max_rep);
     assert(ret == rno);
     int step = 0;
 
@@ -199,7 +198,7 @@ int ErasureCodeOptLrc::parse(ErasureCodeProfile &profile,
                              ostream *ss)
 {
     int err = ErasureCode::parse(profile, ss);
-    err |= sanity_check_k(k, ss);
+    err |= sanity_check_k_m(k, 2, ss);
     if (err)
         return err;
     return parse_ruleset(profile, ss);

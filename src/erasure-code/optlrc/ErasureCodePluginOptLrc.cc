@@ -20,8 +20,6 @@ Alexander Barg, Department of ECE/ISR, University of Maryland
 #include "common/debug.h"
 #include "ErasureCodeOptLrc.h"
 #include "ErasureCodePluginOptLrc.h"
-// re-include our assert
-#include "include/assert.h"
 
 #define dout_subsys ceph_subsys_osd
 #undef dout_prefix

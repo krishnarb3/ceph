@@ -182,11 +182,11 @@ public:
 
     int minimum_to_decode(const std::set<int> &want_to_read,
                           const std::set<int> &available,
-                          std::set<int> *minimum) override;
+                          std::set<int> *minimum);
 
     int create_ruleset(const std::string &name,
                        CrushWrapper &crush,
-                       std::ostream *ss) const override;
+                       std::ostream *ss) const;
 protected:
     virtual int parse(ErasureCodeProfile &profile, std::ostream *ss);
 };
